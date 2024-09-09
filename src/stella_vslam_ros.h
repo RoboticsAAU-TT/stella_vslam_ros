@@ -87,14 +87,14 @@ public:
 template<class M, class NodeType = rclcpp::Node>
 class ModifiedSubscriber : public message_filters::Subscriber<M> {
 public:
-    ModifiedSubscriber(typename message_filters::Subscriber<M>::NodePtr node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default)
+    ModifiedSubscriber(typename message_filters::Subscriber<M> node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default)
         : message_filters::Subscriber<M>(node, topic, qos) {
     }
     ModifiedSubscriber(NodeType* node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default)
         : message_filters::Subscriber<M>(node, topic, qos) {
     }
     ModifiedSubscriber(
-        typename message_filters::Subscriber<M>::NodePtr node,
+        typename message_filters::Subscriber<M> node,
         const std::string& topic,
         const rmw_qos_profile_t qos,
         rclcpp::SubscriptionOptions options)

@@ -140,7 +140,7 @@ void tracking(const std::shared_ptr<stella_vslam_ros::system>& slam_ros,
                              metadata.starting_time.time_since_epoch())
                              .count()
                          + start_offset * 1e9;
-    reader.seek(starting_time);
+    // reader.seek(starting_time);
     rclcpp::Serialization<sensor_msgs::msg::Image> serialization;
     std::queue<std::shared_ptr<sensor_msgs::msg::Image>> que;
     double track_time;
@@ -149,6 +149,10 @@ void tracking(const std::shared_ptr<stella_vslam_ros::system>& slam_ros,
         while (rclcpp::ok()) {
             while (reader.has_next() && que.size() < 2) {
                 auto bag_message = reader.read_next();
+
+                auto msg_time = bag_message->time_stamp;
+                if (msg_time < starting_time) continue;
+
                 if (bag_message->topic_name == camera_topic) {
                     auto msg = std::make_shared<sensor_msgs::msg::Image>();
                     rclcpp::SerializedMessage serialized_msg(*bag_message->serialized_data);
