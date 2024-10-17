@@ -29,8 +29,8 @@ Feature:
   name: "default ORB feature extraction setting"
   scale_factor: 1.2
   num_levels: 8
-  ini_fast_threshold: 30
-  min_fast_threshold: 12
+  ini_fast_threshold: 20
+  min_fast_threshold: 7
 
 Mapping:
   backend: "g2o"
@@ -43,10 +43,10 @@ Mapping:
 
 Tracking:
   backend: "g2o"
-  enable_temporal_keyframe_only_tracking: false
+  enable_temporal_keyframe_only_tracking: true
 
 KeyframeInserter:
-  wait_for_local_bundle_adjustment: false
+  wait_for_local_bundle_adjustment: true
 
 Relocalizer:
   search_neighbor: true
@@ -55,9 +55,9 @@ LoopDetector:
   backend: "g2o"
 
 System:
-  map_format: "msgpack"
-  num_grid_cols: 47
-  num_grid_rows: 30
+  map_format: "sqlite3"
+  num_grid_cols: 40
+  num_grid_rows: 25
 
 PangolinViewer:
   keyframe_size: 0.07
